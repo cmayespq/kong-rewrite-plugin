@@ -262,6 +262,13 @@ local function create_routes_tree_array(routes)
         local err = {error = errorMsg, existing = root['{e}'], collision = {path = routePath, config = v}}
         return err, true
       end
+      -- Both request and response are expected to already exist when configs are queried.
+      if isempty(v.request) then
+        v.request = {}
+      end
+      if isempty(v.response) then
+        v.response = {}
+      end
       root['{e}'] = {path = routePath, config = v, params = params, info = tail}
     end
   end

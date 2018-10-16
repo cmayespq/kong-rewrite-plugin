@@ -31,10 +31,6 @@ function _M.body_filter(conf, scope)
   if scope.res.eof then
     local body = scope.res.body
     local content_type = scope.res.content_type
-    if content_type == 'text' and not isempty(conf.response.text) then
-      ngx.arg[1] = mapTo(scope, conf.response.text)
-      return
-    end
     if content_type == 'html' and not isempty(conf.response.text) then
       ngx.arg[1] = mapTo(scope, conf.response.text)
       return
@@ -48,6 +44,10 @@ function _M.body_filter(conf, scope)
         return
       end
       ngx.arg[1] = newRes
+      return
+    end
+    if not isempty(conf.response.text) then
+      ngx.arg[1] = mapTo(scope, conf.response.text)
       return
     end
     ngx.arg[1] = scope.res.body
