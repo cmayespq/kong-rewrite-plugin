@@ -1,5 +1,5 @@
 package = "kong-plugin-rewrite"  
-version = "0.1.0-1" 
+version = "0.1.2-1" 
 
 local pluginName = package:match("^kong%-plugin%-(.+)$")
 
